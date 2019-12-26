@@ -9,7 +9,7 @@ install:
 	python3 setup.py install
 
 clean:
-	rm -rf build dist *.egg-info
+	rm -rf build dist *.egg-info templatelib/*.so
 
 check:
 	$(MAKE) check --print-directory -C templatelib

@@ -3,6 +3,8 @@
 #include "py_examples.h"
 #include "py_buffer.h"
 
+static void py_examples_class_free(PyObject *obj);
+
 //
 // py_examples_array
 //
@@ -21,12 +23,12 @@ PyObject* py_examples_array(PyObject* self, PyObject* args)
   }
 
   try {
-    // Buffer template class is defined in py_buffer.h
+    // A class wraping `Buffer protocol` implemented in py_buffer.h
     Buffer<double> buf(py_array, "py_array"); // May throw TypeError
 
     if(buf.ndim != 1) {
       PyErr_SetString(PyExc_TypeError, "Exptected a 1-dim array");
-      return NULL;
+      throw TypeError();
     }
 
     const size_t n = buf.shape[0];
@@ -51,8 +53,6 @@ PyObject* py_examples_array(PyObject* self, PyObject* args)
 class Class {
 
 };
-
-static void py_examples_class_free(PyObject *obj);
 
 PyObject* py_examples_class_alloc(PyObject* self, PyObject* args)
 {

@@ -12,3 +12,10 @@ def array(a, x):
 
     c._examples_array(a, x)
 
+
+class Class:
+    def __init__(self):
+        self._class = c._examples_class_alloc()
+
+    def __repr__(self):
+        return "Class()"

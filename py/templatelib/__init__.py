@@ -1,5 +1,5 @@
-print('hello')
-
 from . import examples
+from .examples import Class
 
-__all__ = ['examples', ]
+# Declare that these are the public APIs, e.g., used by linter flake8
+__all__ = ['examples', 'Class', ]
