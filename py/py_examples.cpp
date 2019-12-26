@@ -1,3 +1,4 @@
+#include <vector>
 #include <cassert>
 #include "error.h"
 #include "py_examples.h"
@@ -51,8 +52,16 @@ PyObject* py_examples_array(PyObject* self, PyObject* args)
 // Example wrapping a C++ class
 //
 class Class {
+public:
+  Class();
 
+  std::vector<double> v;
 };
+
+Class::Class() : v({1.0, 3.0, 5.0})
+{
+  
+}
 
 PyObject* py_examples_class_alloc(PyObject* self, PyObject* args)
 {
@@ -71,4 +80,39 @@ void py_examples_class_free(PyObject *obj)
 
   delete c;
 }
+
+PyObject* py_examples_class_len(PyObject* self, PyObject* args)
+{
+  PyObject *py_class;
+  if(!PyArg_ParseTuple(args, "O", &py_class)) {
+    return NULL;
+  }
+
+  Class* const c = (Class*) PyCapsule_GetPointer(py_class, "_Class");
+  assert(c);
+
+  return Py_BuildValue("k", static_cast<unsigned long>(c->v.size()));
+}
+
+PyObject* py_examples_class_getitem(PyObject* self, PyObject* args)
+{
+  PyObject *py_class;
+  int i;
+  if(!PyArg_ParseTuple(args, "Oi", &py_class, &i)) {
+    return NULL;
+  }
+
+  Class* const c = (Class*) PyCapsule_GetPointer(py_class, "_Class");
+  assert(c);
+
+  if(0 <= i && i < c->v.size()) {
+    return Py_BuildValue("d", c->v[i]);
+  }
+
+  // Python standard exceptions
+  // https://docs.python.org/3/c-api/exceptions.html
+  PyErr_SetNone(PyExc_IndexError);
+  return NULL;
+}
+
 

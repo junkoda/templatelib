@@ -5,5 +5,6 @@
 
 PyObject* py_examples_array(PyObject* self, PyObject* args);
 PyObject* py_examples_class_alloc(PyObject* self, PyObject* args);
-
+PyObject* py_examples_class_len(PyObject* self, PyObject* args);
+PyObject* py_examples_class_getitem(PyObject* self, PyObject* args);
 #endif

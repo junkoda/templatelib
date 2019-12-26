@@ -7,6 +7,10 @@ static PyMethodDef methods[] = {
    "_examples_array(a, x)"},
   {"_examples_class_alloc",  py_examples_class_alloc, METH_VARARGS,
    "_examples_class_alloc()"},
+  {"_examples_class_len",  py_examples_class_len, METH_VARARGS,
+   "_examples_class_len(_class)"},
+  {"_examples_class_getitem",  py_examples_class_getitem, METH_VARARGS,
+   "_examples_class_getitem(_class, i)"},
 
   {NULL, NULL, 0, NULL}
 };
