@@ -1,0 +1,5 @@
+*.so
+dist
+build
+templatelib.egg-info
+templatelib/config.py
