@@ -105,7 +105,7 @@ PyObject* py_examples_class_getitem(PyObject* self, PyObject* args)
   Class* const c = (Class*) PyCapsule_GetPointer(py_class, "_Class");
   assert(c);
 
-  if(0 <= i && i < c->v.size()) {
+  if(0 <= i && i < static_cast<int>(c->v.size())) {
     return Py_BuildValue("d", c->v[i]);
   }
 
